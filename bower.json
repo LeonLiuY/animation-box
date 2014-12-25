@@ -1,0 +1,29 @@
+{
+  "name": "animation-box",
+  "version": "0.0.0",
+  "authors": [
+    "Anonymous <anonymous@example.com>"
+  ],
+  "description": "Element providing solution to no problem in particular.",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "seed"
+  ],
+  "main": "animation-box.html",
+  "license": "MIT",
+  "homepage": "https://github.com/<USERNAME>/animation-box/",
+  "ignore": [
+    "/.*",
+    "/tests/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5.2",
+    "core-animated-pages": "Polymer/core-animated-pages#~0.5.2",
+    "observe-js": "~0.5.2"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^2.0.5"
+  }
+}
