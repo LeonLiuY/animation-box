@@ -52,17 +52,24 @@ Element providing solution to no problem in particular.
     }
     Polymer({
       /**
-       * The `transitions` attribute for core-animated-pages
+       * The `transitions` attribute for animation-box
        *
        * @attribute transitions
        * @type string
-       * @default ''
+       * @default 'hero-transition'
        */
-      selected: 0,
       transitions: 'hero-transition',
+      /**
+       * The `items` attribute for animation-box
+       *
+       * @attribute items
+       * @type array
+       * @default []
+       */
       items: [],
       items1: null,
       items2: null,
+      selected: 0,
       templateName: 'itemsTemplate',
       observe: {'items': 'updateItems'},
       domReady: function() {
