@@ -1,0 +1,38 @@
+{
+  "name": "animation-box",
+  "authors": [
+    "Liu Yang <liuyang1204@hotmail.com>"
+  ],
+  "description": "Provide single page, animation-on-data-change wrapper for core-animated-pages",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "animation-box"
+  ],
+  "main": "animation-box.html",
+  "license": "MIT",
+  "homepage": "https://github.com/liuyang1204/animation-box/",
+  "ignore": [
+    "/.*",
+    "/tests/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5.2",
+    "core-animated-pages": "Polymer/core-animated-pages#~0.5.2",
+    "observe-js": "~0.5.2"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^2.0.5"
+  },
+  "_release": "587856c1b1",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "587856c1b157b3ada93f2f5e9ace5f521015bd11"
+  },
+  "_source": "git://github.com/liuyang1204/animation-box.git",
+  "_target": "master",
+  "_originalSource": "liuyang1204/animation-box",
+  "_direct": true
+}

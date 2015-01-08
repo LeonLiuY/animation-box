@@ -1,0 +1,129 @@
+<!--
+    @license
+    Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+    This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+    The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+    The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+    Code distributed by Google as part of the polymer project is also
+    subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>animation-box Demo</title>
+
+    <script src="../webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="animation-box.html">
+    <link rel="import" href="../polymer/polymer.html">
+    <link rel="import" href="../polymer/polymer.html">
+</head>
+
+<polymer-element name="box-wrapper">
+    <template>
+        <style>
+            .spaced {
+                margin: 10px;
+            }
+            .narrow {
+                width: 40px;
+            }
+        </style>
+        <div class="spaced">
+            <button on-tap="{{addItem}}">Add item at index:</button>
+            <input value="{{addIdx}}" class="narrow" type="number">
+            <br>
+            <button on-tap="{{updateItem}}">Update item at index:</button>
+            <input value="{{updateIdx}}" class="narrow" type="number">          
+            <br>
+            <button on-tap="{{deleteItem}}">Delete item at index:</button>
+            <input value="{{deleteIdx}}" class="narrow" type="number">
+            <br>
+            <button on-tap="{{deleteAll}}">Delete all</button>
+        </div>
+        <div>
+        <animation-box items="{{items}}" transitions="hero-transition">
+            <template>
+                <style>
+                    .item {
+                        background: #e7e7e7;
+                        padding: 16px;
+                        margin: 8px;
+                        border-radius: 3px;
+                        box-sizing: border-box;
+                        position: relative;
+                    }   
+                </style>
+                <ul>
+                    <template repeat="{{items}}">
+                        <li hero-id="{{id}}" hero class="item">{{val}}</li>
+                    </template>
+                </ul>
+            </template>
+        </animation-box>
+        </div>
+        
+    </template>
+    <script>
+        var gen = {
+            generateId: function(len, radix) {
+                var digits = '0123456789abcdef'.split('');
+                var uuid = [];
+                radix = radix || digits.length;
+
+                for (var i = 0; i < len; i++) {
+                    uuid[i] = digits[Math.floor(Math.random()*radix)];
+                }
+                
+                return uuid.join('');    
+            },
+            generateString: function(len) {
+                var s = '';
+                for (var i=0; i<len; i++) {
+                    s += String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+                }
+                return s;
+            },
+            generateName: function(min, max) {
+                return this.generateString(Math.floor(Math.random() * (max - min + 1) + min));
+            }
+        };
+        Polymer({
+            items: [],
+            addIdx: 0,
+            updateIdx: 0,
+            deleteIdx: 0,
+            ready: function() {
+                for (var i = 0; i < 5; i++) {
+                    this.items.push({id: gen.generateId(8), val: gen.generateName(4, 8)});
+                }
+            },
+            addItem: function() {
+                this.items.splice(this.addIdx, 0, {
+                   id: gen.generateId(8), 
+                   val: gen.generateName(4, 8) 
+                });
+            },
+            updateItem: function() {
+                if (this.items[this.updateIdx]) {
+                    this.items[this.updateIdx].val = gen.generateName(4, 8);
+                }
+            },
+            deleteItem: function() {
+                this.items.splice(this.deleteIdx, 1);
+            },
+            deleteAll: function() {
+                this.items.splice(0,this.items.length);
+            }
+        });
+    </script>
+
+</polymer-element>
+<body unresolved>
+
+<box-wrapper>
+
+</box-wrapper>
+
+</body>
+</html>

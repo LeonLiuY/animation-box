@@ -1,0 +1,125 @@
+<!--
+    @license
+    Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+    This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+    The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+    The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+    Code distributed by Google as part of the polymer project is also
+    subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../core-animated-pages/core-animated-pages.html">
+<script src="../observe-js/src/observe.js"></script>
+
+<!--
+Provide single page, animation-on-data-change wrapper for core-animated-pages.
+
+Designed for general purpose one-page animation, but only support list currently.
+
+##### Example
+
+    <animation-box items="{{items}}" transitions="hero-transition">
+        <template>
+            <ul>
+                <template repeat="{{items}}">
+                    <li hero-id="{{id}}" hero class="item">{{val}}</li>
+                </template>
+            </ul>
+        </template>
+    </animation-box>
+
+@element animation-box
+@blurb Provide single page, animation-on-data-change wrapper for core-animated-pages
+@status alpha
+@homepage http://liuyang1204.github.io/animation-box
+-->
+<polymer-element name="animation-box" attributes="transitions items">
+  <template>
+    <core-animated-pages selected="{{selected}}" on-core-animated-pages-transition-end="{{done}}" transitions="{{transitions}}">
+        <section>
+          <template bind="{{data1}}" ref="{{templateName}}"></template>
+        </section>
+        <section>
+          <template bind="{{data2}}" ref="{{templateName}}"></template>
+        </section>
+    </core-animated-pages>
+  </template>
+
+  <script>
+    function clone(obj) {
+      var copy;
+      if (null == obj || "object" != typeof obj) return obj;
+
+      if (obj instanceof Array) {
+        return obj.slice(0);
+      }
+
+      copy = {};
+      for (var attr in obj) {
+          if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+      }
+      return copy;
+    }
+    Polymer({
+      /**
+       * The inherited `transitions` attribute for core-animated-pages
+       *
+       * @attribute transitions
+       * @type string
+       * @default 'hero-transition'
+       */
+      transitions: 'hero-transition',
+      /**
+       * The list items
+       *
+       * @attribute items
+       * @type array
+       * @default []
+       */
+      items: [],
+      items1: null,
+      items2: null,
+      selected: 0,
+      templateName: 'itemsTemplate',
+      observe: {'items': 'updateItems'},
+      domReady: function() {
+        this.items1 = clone(this.items);
+        this.items2 = clone(this.items);
+        this.updateData();
+
+        var template = this.querySelector('template');
+        template.id = this.templateName;
+        this.shadowRoot.appendChild(template);
+      },
+      done: function() {
+        if (this.selected) {
+          this.items1 = clone(this.items);
+        } else {
+          this.items2 = clone(this.items);
+        }
+        this.updateData();
+      },
+      updateItems: function(splices) {
+        if (arguments.length == 1) {
+          var splices = arguments[0];
+          if (this.selected) {
+            this.items1 = clone(this.items);
+          } else {
+            this.items2 = clone(this.items);
+          }
+          this.updateData();
+          this.selected = this.selected ? 0 : 1;
+        }
+      },
+      updateData: function() {
+        if (this.data1 == null || this.items1 != this.data1.items) {
+          this.data1 = {items: this.items1};
+        }
+        if (this.data2 == null || this.items2 != this.data2.items) {
+          this.data2 = {items: this.items2};
+        }
+      }
+    });
+
+  </script>
+</polymer-element>

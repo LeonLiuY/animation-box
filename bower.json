@@ -1,0 +1,7 @@
+{
+  "name": "animation-box#gh-pages",
+  "private": true,
+  "dependencies": {
+    "animation-box": "liuyang1204/animation-box#master"
+  }
+}
