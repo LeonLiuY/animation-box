@@ -2,18 +2,18 @@
   "name": "animation-box",
   "version": "0.0.0",
   "authors": [
-    "Anonymous <anonymous@example.com>"
+    "Liu Yang <liuyang1204@hotmail.com>"
   ],
-  "description": "Element providing solution to no problem in particular.",
+  "description": "Provide single page, animation-on-data-change wrapper for core-animated-pages",
   "keywords": [
     "web-component",
     "web-components",
     "polymer",
-    "seed"
+    "animation-box"
   ],
   "main": "animation-box.html",
   "license": "MIT",
-  "homepage": "https://github.com/<USERNAME>/animation-box/",
+  "homepage": "https://github.com/liuyang1204/animation-box/",
   "ignore": [
     "/.*",
     "/tests/"

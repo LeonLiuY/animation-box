@@ -12,16 +12,26 @@
 <script src="../observe-js/src/observe.js"></script>
 
 <!--
-Element providing solution to no problem in particular.
+Provide single page, animation-on-data-change wrapper for core-animated-pages.
+
+Designed for general purpose one-page animation, but only support list currently.
 
 ##### Example
 
-    <animation-box></animation-box>
+    <animation-box items="{{items}}" transitions="hero-transition">
+        <template>
+            <ul>
+                <template repeat="{{items}}">
+                    <li hero-id="{{id}}" hero class="item">{{val}}</li>
+                </template>
+            </ul>
+        </template>
+    </animation-box>
 
 @element animation-box
-@blurb Element providing solution to no problem in particular.
+@blurb Provide single page, animation-on-data-change wrapper for core-animated-pages
 @status alpha
-@homepage http://polymerlabs.github.io/animation-box
+@homepage http://liuyang1204.github.io/animation-box
 -->
 <polymer-element name="animation-box" attributes="transitions items">
   <template>
@@ -52,7 +62,7 @@ Element providing solution to no problem in particular.
     }
     Polymer({
       /**
-       * The `transitions` attribute for animation-box
+       * The inherited `transitions` attribute for core-animated-pages
        *
        * @attribute transitions
        * @type string
@@ -60,7 +70,7 @@ Element providing solution to no problem in particular.
        */
       transitions: 'hero-transition',
       /**
-       * The `items` attribute for animation-box
+       * The list items
        *
        * @attribute items
        * @type array
